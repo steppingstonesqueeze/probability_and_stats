@@ -185,7 +185,7 @@ p_cov_comp <- ggplot2::ggplot(cov_long, ggplot2::aes(x = n, y = coverage, color 
   ggplot2::theme_minimal(base_size = 12)
 
 # ---- Draw all figures ----
-#(p_hist / p_qq) | (p_cov_plain / p_cov_comp)
+#(p_hist / p_qq) | (p_cov_plain / p_cov_comp) # patchwork #
 
 
 (p_hist)
