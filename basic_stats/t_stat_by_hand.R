@@ -28,3 +28,20 @@ for (i in 1:N)
 true.sig.level <- n.reject/N #  
 
 true.sig.level # should be at alpha ideally #
+
+# To run a very large Monte Carlo sim - use replicate like so #
+N <- 100000
+sim_t <- replicate(N, {
+  x <- rnorm(m, mean = 0, sd = 1)
+  y <- rnorm(n, mean = 0, sd = 1)
+  tstatistic(x, y)
+})
+
+true.sig.level <- mean(abs(sim_t) > qt(1 - alpha/2, m + n - 2))
+true.sig.level
+
+
+
+
+
+
