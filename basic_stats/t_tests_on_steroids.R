@@ -59,3 +59,46 @@ simulate_t_test <- function(
     t = tvec, df = dfvec
   )
 }
+
+# Usage
+
+# Example 1
+set.seed(1)
+res <- simulate_t_test(
+  rx = function(n) rnorm(n, 0, 1),
+  ry = function(n) rnorm(n, 0, 1),
+  m = 100, n = 100, N = 10000, alpha = 0.10,
+  alternative = "two.sided", test = "pooled"
+)
+res$true_sig_level  # ~0.10 under the null
+
+
+# Example 2 - non-normal but equal means
+
+set.seed(1)
+res_gamma_t <- simulate_t_test(
+  rx = function(n) rgamma(n, shape = 4, scale = 2),     # mean = 8
+  ry = function(n) rgamma(n, shape = 4, scale = 2),     # same mean
+  m = 50, n = 70, N = 20000, alpha = 0.05,
+  alternative = "two.sided", test = "welch"
+)
+res_gamma_t$true_sig_level
+
+
+# Example 3 - unequal means
+set.seed(1)
+res_power <- simulate_t_test(
+  rx = function(n) rnorm(n, 0, 1),
+  ry = function(n) rnorm(n, 0.3, 1),   # mean shift of +0.3
+  m = 40, n = 40, N = 20000, alpha = 0.05,
+  alternative = "greater", test = "welch"
+)
+res_power$true_sig_level  # this is empirical power here
+
+
+
+
+
+
+
+
