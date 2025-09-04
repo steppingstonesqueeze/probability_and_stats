@@ -95,10 +95,43 @@ res_power <- simulate_t_test(
 )
 res_power$true_sig_level  # this is empirical power here
 
+# A few more examples to illustrate this 
+
+x=rexp(m,rate=1)
+y=rexp(n,rate=1)
+
+set.seed(1)
+res_power <- simulate_t_test(
+  rx = function(n) rexp(m, rate = 1),
+  ry = function(n) rexp(n, rate = 1),   # mean shift of +0.3
+  m = 40, n = 40, N = 20000, alpha = 0.05,
+  alternative = "greater", test = "welch"
+)
+res_power$true_sig_level  # this is empirical power here
+
+# cannot reject the null -- null being both rates are the same for the two
+# exponential distribution samples
+set.seed(1)
+res_power <- simulate_t_test(
+  rx = function(n) rexp(m, rate = 1),
+  ry = function(n) rexp(n, rate = 1),   # mean shift of +0.3
+  m = 4000, n = 4000, N = 20000, alpha = 0.05,
+  alternative = "greater", test = "welch"
+)
+res_power$true_sig_level  # this is empirical power here
 
 
+# what if one ewxponential distribution has much higher rates?
+# lets do a greater for the alternative : ie, H1 = rate for rv x > rate for rv y
 
-
+set.seed(1)
+res_power <- simulate_t_test(
+  rx = function(n) rexp(m, rate = 0.01),
+  ry = function(n) rexp(n, rate = 1),   # mean shift of +0.3
+  m = 4000, n = 4000, N = 20000, alpha = 0.05,
+  alternative = "greater", test = "welch"
+)
+res_power$true_sig_level  # this is empirical power here
 
 
 
