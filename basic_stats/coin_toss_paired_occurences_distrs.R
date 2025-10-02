@@ -3,7 +3,7 @@
 
 library(ggplot2)
 EPS <- 1.0e-10
-p_H <- 0.5
+p_H <- 0.7
 p_T <- 1.0 - p_H
 N <- 100000
 N1 <- N - 1
