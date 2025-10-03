@@ -27,6 +27,9 @@ for (i in 1:len_N_seq) {
   
 }
 
+# This is trivial to compute using Stirling formula for n! 
+# Assume 2n trials and then simply compute 2n Choose n - simplifying gives the below
+
 theoretical_same_ratio <- sqrt(1.0 / (pi * N_seq_2))
 
 comparison_df <- data.frame(N = N_seq, 
