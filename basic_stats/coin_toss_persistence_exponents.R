@@ -1,6 +1,7 @@
 # coin toss persistence exponents
 
-
+library(ggplot2)
+library(dplyr)
 
 # Coin toss - histo of distance between successsive heads
 
@@ -49,6 +50,25 @@ heads_win <- ifelse(heads_fraction > 0.5, 1, 0)
 head(heads_win)
 
 plot(heads_win, col = "green")
+
+# Use run length encoding to look into 0s and 1s runs
+
+runs <- rle(data1)
+
+results <- data.frame(
+  group = runs$values,
+  runs = runs$lengths
+)
+
+head(results)
+
+# plot overlapping histos?
+
+ggplot(
+  data = results
+) + geom_histogram(aes(x = runs, fill = as.factor(group)), alpha = 0.5)
+
+
 
 
 
