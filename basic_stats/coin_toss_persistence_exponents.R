@@ -82,8 +82,6 @@ ggplot(
 
 ggplot(
   data = results
-) + geom_histogram(aes(x = log(runs+EPS), fill = as.factor(group)), alpha = 0.5)
-
-
+) + geom_histogram(aes(x = log(runs+EPS), fill = as.factor(group)), alpha = 0.5, bins = 100)
 
 
